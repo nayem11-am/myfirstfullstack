@@ -7,13 +7,12 @@ import { Input } from "@/components/ui/Input";
 import { NotificationDropdown } from "@/components/dashboard/NotificationDropdown";
 import { InvitationDropdown } from "@/components/dashboard/InvitationDropdown";
 import { useSearchStore } from "@/store/useSearchStore";
-import { MobileSidebar } from "@/components/dashboard/MobileSidebar";
-import { useState } from "react";
+import { useModalStore } from "@/store/useModalStore";
 
 export function Topbar() {
   const pathname = usePathname();
   const { query, setQuery } = useSearchStore();
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const setMobileSidebarOpen = useModalStore((state) => state.setMobileSidebarOpen);
 
   // Derive page title from pathname
   const getPageTitle = () => {
@@ -27,11 +26,9 @@ export function Topbar() {
   return (
     <header className="h-20 border-b border-slate-100 bg-white/80 backdrop-blur-xl sticky top-0 z-40 px-6 md:px-10 flex items-center justify-between transition-all duration-500">
       <div className="flex items-center gap-6">
-        <MobileSidebar isOpen={isMobileSidebarOpen} setIsOpen={setIsMobileSidebarOpen} />
-        
         {/* Mobile Menu Trigger */}
         <button 
-          onClick={() => setIsMobileSidebarOpen(true)}
+          onClick={() => setMobileSidebarOpen(true)}
           className="md:hidden h-10 w-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-100 transition-all border border-slate-100"
         >
           <Menu size={20} />
