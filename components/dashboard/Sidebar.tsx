@@ -59,7 +59,10 @@ export function Sidebar({ isMobile, onSelect }: { isMobile?: boolean, onSelect?:
       )}
     >
       {/* 1. Header: Workspace / User Info */}
-      <div className="p-6 flex items-center justify-between flex-shrink-0 mb-4">
+      <div className={cn(
+        "p-6 flex items-center justify-between flex-shrink-0 mb-4",
+        isMobile && "pt-12"
+      )}>
         {!actualCollapsed && mounted && (
           <Link href="/dashboard/settings" onClick={onSelect} className="flex items-center gap-3 flex-1 px-1 group cursor-pointer">
             <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl flex items-center justify-center text-white text-[14px] font-black shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-2 ring-white/10 group-hover:ring-white/30">

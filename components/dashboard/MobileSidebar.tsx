@@ -33,7 +33,7 @@ export function MobileSidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpe
             
             <button 
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 -right-12 h-10 w-10 flex items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10"
+              className="absolute top-4 right-4 h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 text-white hover:bg-white/10 transition-all border border-white/10 z-[110]"
             >
               <X size={20} />
             </button>
