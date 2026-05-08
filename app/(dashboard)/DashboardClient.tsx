@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useSocket } from "@/hooks/useSocket";
 import { useModalStore } from "@/store/useModalStore";
 import { MobileSidebar } from "@/components/dashboard/MobileSidebar";
 
@@ -12,8 +13,8 @@ export default function DashboardClient({ user, children }: { user: any; childre
 
   return (
     <>
-      <MobileSidebar isOpen={isMobileSidebarOpen} setIsOpen={setMobileSidebarOpen} />
       {children}
+      <MobileSidebar isOpen={isMobileSidebarOpen} setIsOpen={setMobileSidebarOpen} />
     </>
   );
 }
