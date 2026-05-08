@@ -58,7 +58,7 @@ export default async function DashboardLayout({
           
           {/* 4. Scrollable Content Area */}
           <main className="flex-1 overflow-y-auto scroll-smooth">
-            <div className="p-6 md:p-12 max-w-[1600px] mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="p-4 md:p-12 max-w-[1600px] mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
               {children}
             </div>
           </main>

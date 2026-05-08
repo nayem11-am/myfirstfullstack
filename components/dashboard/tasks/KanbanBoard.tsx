@@ -163,18 +163,19 @@ export function KanbanBoard() {
 
   return (
     <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 h-full min-h-[700px]">
+      <div className="flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-8 h-full min-h-[700px] overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0">
         {COLUMNS.map((column) => {
           const columnTasks = filteredTasks.filter((t) => t.status?.toLowerCase() === column.id.toLowerCase());
 
           return (
-            <DroppableColumn 
-              key={column.id} 
-              column={column} 
-              columnTasks={columnTasks} 
-              openModal={openModal} 
-              query={query} 
-            />
+            <div key={column.id} className="min-w-[300px] md:min-w-0">
+              <DroppableColumn 
+                column={column} 
+                columnTasks={columnTasks} 
+                openModal={openModal} 
+                query={query} 
+              />
+            </div>
           );
         })}
       </div>
