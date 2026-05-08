@@ -1,7 +1,7 @@
 "use client";
 
-import { CldUploadWidget } from "next-cloudinary";
-import { Button } from "./Button";
+import { CldUploadWidget, CloudinaryUploadWidgetResults } from "next-cloudinary";
+import { Button } from "@/components/ui/Button";
 import { ImagePlus } from "lucide-react";
 import { useCallback } from "react";
 
@@ -11,9 +11,12 @@ interface ImageUploadProps {
 }
 
 export function ImageUpload({ onUpload, buttonText = "Upload Image" }: ImageUploadProps) {
-  const handleUpload = useCallback((result: any) => {
+  const handleUpload = useCallback((result: CloudinaryUploadWidgetResults) => {
     if (result.event === "success") {
-      onUpload(result.info.secure_url);
+      const info = result.info as any; // Cloudinary types can be tricky, cast as needed but check existence
+      if (info?.secure_url) {
+        onUpload(info.secure_url);
+      }
     }
   }, [onUpload]);
 
@@ -31,7 +34,7 @@ export function ImageUpload({ onUpload, buttonText = "Upload Image" }: ImageUplo
         <Button 
           type="button" 
           variant="outline" 
-          onClick={() => open()}
+          onClick={() => open?.()}
           className="flex items-center gap-2"
         >
           <ImagePlus size={16} />
