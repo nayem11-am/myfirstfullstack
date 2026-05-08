@@ -1,33 +1,45 @@
 "use client";
 
-import { useState } from "react";
-import { 
-  Dialog, 
-  DialogContent, 
-} from "@/components/ui/Dialog";
+import { motion, AnimatePresence } from "framer-motion";
 import { Sidebar } from "./Sidebar";
-import { Menu, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export function MobileSidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val: boolean) => void }) {
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="fixed inset-y-0 left-0 w-[280px] h-full p-0 border-none rounded-none bg-[#0b0e14] z-[150] sm:max-w-none">
-        <div className="flex flex-col h-full relative">
-          <Button 
-            variant="ghost" 
-            size="icon" 
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="absolute top-4 right-[-50px] text-white hover:bg-white/10"
-          >
-            <X size={24} />
-          </Button>
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100]"
+          />
           
-          <div className="flex-1 overflow-y-auto">
-            <Sidebar isMobile onSelect={() => setIsOpen(false)} />
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
+          {/* Drawer */}
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-y-0 left-0 w-[280px] bg-[#08090b] z-[101] shadow-2xl flex flex-col"
+          >
+            <div className="flex-1 overflow-y-auto">
+              <Sidebar isMobile onSelect={() => setIsOpen(false)} />
+            </div>
+            
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 -right-12 h-10 w-10 flex items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10"
+            >
+              <X size={20} />
+            </button>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 }
