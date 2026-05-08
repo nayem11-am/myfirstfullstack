@@ -53,8 +53,8 @@ export function Sidebar({ isMobile, onSelect }: { isMobile?: boolean, onSelect?:
   return (
     <aside 
       className={cn(
-        "hidden md:flex flex-col bg-[#08090b] text-slate-400 transition-all duration-500 h-screen sticky top-0 z-30 overflow-hidden font-sans border-r border-white/5",
-        isMobile && "flex w-full h-full border-none",
+        "flex-col bg-[#08090b] text-slate-400 transition-all duration-500 h-screen sticky top-0 z-30 overflow-hidden font-sans border-r border-white/5",
+        isMobile ? "flex w-full h-full border-none" : "hidden md:flex",
         actualCollapsed ? "w-[80px]" : "w-[260px]"
       )}
     >
